@@ -10,18 +10,25 @@ References:
 
 # Command line parameters:
 The following parameters are available:
+
   -password string
         password for smtp server (required)
+		
   -path string
         path where the vcf files reside (or vcf file directly) (required)
+		
   -recipient string
         recipients email address (required)
+		
   -sender string
         senders email address (required)
+		
   -simulateDate string
         simulate date string, e.g. "0716" for the 16th of July (optional)
+		
   -smtp string
         smtp server adress, e.g. "smtp.variomedia.de:25" (required)
+		
   -username string
         username for smtp server (required)
 
