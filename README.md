@@ -1,3 +1,4 @@
+# Introduction
 VcardEmailReminder parses one or multiple addressbook VCARD files (.vcf) and 
 checks the Birthday field ("BDAY") to verify if its the persons birthday today.
 If yes a email is sent as an reminder.
@@ -8,7 +9,7 @@ and scan this local files with VcardEmailReminder and put both programms in a Cr
 References:
 - vdirsyncer: https://github.com/pimutils/vdirsyncer 
 
-# Command line parameters:
+# Command line parameters
 The following parameters are available:
 
   --password : password for smtp server (required)
@@ -27,9 +28,9 @@ The following parameters are available:
 
 
 
-# Example command line:
+# Example command line
 ./VcardEmailReminder --password "123456" --path ~/.contacts/ --recipient recipient@test.test --sender bdreminder@test.test --smtp smtp.testprovider.com:25 --username username@test.test --simulateDate "1218"
 
-# Dependencies:
+# Dependencies
 go get -u github.com/mapaiva/vcard-go
 
