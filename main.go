@@ -176,14 +176,14 @@ func sendEmailReminder(formattedName string, birthday time.Time) error {
 
 	from := mail.Address{"Birthday Reminder", *emailSender}
 	to := mail.Address{"", *emailRecipient}
-	title := formattedName + " has birthday today"
+	title := formattedName + " birthday is on " + birthday.Format("Jan 2")
 
-	body := formattedName + " has birthday on " + birthday.Format("Jan 2") + "!"
+	body := formattedName + " birthday is on " + birthday.Format("Jan 2") + "!"
 	if birthday.Year() != 1 {
 		var age int
 		age = time.Now().Year() - birthday.Year()
 		log.Printf("Age: %d", age)
-		body = body + fmt.Sprintf("\r\nHe/she is then %d years old.\r\n", age)
+		body = body + fmt.Sprintf("\r\nHe/she gets %d years old.\r\n", age)
 	}
 
 	header := make(map[string]string)
@@ -220,5 +220,5 @@ func sendEmailReminder(formattedName string, birthday time.Time) error {
 func encodeRFC2047(String string) string {
 	// use mail's rfc2047 to encode any string
 	encoded := mail.Address{String, ""}
-	return strings.Trim(encoded.String(), " <@>")
+	return strings.Trim(encoded.String(), "\" <@>")
 }
