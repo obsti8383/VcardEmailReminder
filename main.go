@@ -174,8 +174,8 @@ func sendEmailReminder(formattedName string, birthday time.Time) error {
 		strings.Split(*smtpServer, ":")[0],
 	)
 
-	from := mail.Address{"Birthday Reminder", *emailSender}
-	to := mail.Address{"", *emailRecipient}
+	from := mail.Address{Name: "Birthday Reminder", Address: *emailSender}
+	to := mail.Address{Name: "", Address: *emailRecipient}
 	title := formattedName + " birthday is on " + birthday.Format("Jan 2")
 
 	body := formattedName + " birthday is on " + birthday.Format("Jan 2") + "!"
@@ -219,6 +219,6 @@ func sendEmailReminder(formattedName string, birthday time.Time) error {
 
 func encodeRFC2047(String string) string {
 	// use mail's rfc2047 to encode any string
-	encoded := mail.Address{String, ""}
+	encoded := mail.Address{Name: String, Address: ""}
 	return strings.Trim(encoded.String(), "\" <@>")
 }
