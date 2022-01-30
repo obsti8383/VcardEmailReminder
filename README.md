@@ -1,4 +1,7 @@
 # Introduction
+
+![Go Vet and Lint Status](https://github.com/obsti8383/VcardEmailReminder/actions/workflows/go_lint_vet_and_testBuild.yml/badge.svg)
+
 VcardEmailReminder parses one or multiple addressbook VCARD files (.vcf) and 
 checks the Birthday field ("BDAY") to verify if its the persons birthday today.
 If yes a email is sent as an reminder.
