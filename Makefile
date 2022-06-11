@@ -18,6 +18,6 @@ vet: lint
 .PHONY:vet
 
 build: vet
-	go build
+	go build -trimpath -buildvcs=false
 .PHONY:build
 
