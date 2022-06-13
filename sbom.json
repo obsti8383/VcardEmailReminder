@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:31a41dad-e37f-48aa-a8c6-3b93c7a62099",
+  "serialNumber": "urn:uuid:f4230b28-07a6-41b5-a9ee-ab9a4cb6ca1a",
   "version": 1,
   "metadata": {
-    "timestamp": "2022-06-13T17:55:20Z",
+    "timestamp": "2022-06-13T18:02:57Z",
     "tools": [
       {
         "vendor": "CycloneDX",
@@ -45,11 +45,29 @@
       }
     ],
     "component": {
-      "bom-ref": "pkg:golang/VcardEmailReminder@v0.0.0-20220613175445-9d6224880323?type=module",
+      "bom-ref": "pkg:golang/VcardEmailReminder@v0.0.0-20220613180231-d104ce19e8e1?type=module",
       "type": "application",
       "name": "VcardEmailReminder",
-      "version": "v0.0.0-20220613175445-9d6224880323",
-      "purl": "pkg:golang/VcardEmailReminder@v0.0.0-20220613175445-9d6224880323?type=module",
+      "version": "v0.0.0-20220613180231-d104ce19e8e1",
+      "purl": "pkg:golang/VcardEmailReminder@v0.0.0-20220613180231-d104ce19e8e1?type=module",
+      "properties": [
+        {
+          "name": "cdx:gomod:build:env:CGO_ENABLED",
+          "value": "1"
+        },
+        {
+          "name": "cdx:gomod:build:env:GOARCH",
+          "value": "amd64"
+        },
+        {
+          "name": "cdx:gomod:build:env:GOOS",
+          "value": "linux"
+        },
+        {
+          "name": "cdx:gomod:build:env:GOVERSION",
+          "value": "go1.17.6"
+        }
+      ],
       "evidence": {
         "licenses": [
           {
@@ -94,7 +112,7 @@
   ],
   "dependencies": [
     {
-      "ref": "pkg:golang/VcardEmailReminder@v0.0.0-20220613175445-9d6224880323?type=module",
+      "ref": "pkg:golang/VcardEmailReminder@v0.0.0-20220613180231-d104ce19e8e1?type=module",
       "dependsOn": [
         "pkg:golang/github.com/mapaiva/vcard-go@v1.2.0?type=module"
       ]
