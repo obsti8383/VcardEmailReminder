@@ -35,7 +35,7 @@ jobs:
       uses: CycloneDX/gh-gomod-generate-sbom@v1
       with:
         version: v1
-        args: app -licenses -json -output sbom.json
+        args: app -licenses -json -output sbom.json -main .
 
     - name: Commit files
       run: |
