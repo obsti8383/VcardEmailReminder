@@ -13,6 +13,10 @@ import (
 // function for filepath.Walk() which does all the work of parsing VCF files
 // and checking if a birthday date matches
 func evaluateVCards(path string, info os.FileInfo, err error) error {
+	if err != nil {
+		return err
+	}
+
 	_, err = os.Stat(path)
 	if err != nil {
 		return err
@@ -97,7 +101,6 @@ func evaluateVCards(path string, info os.FileInfo, err error) error {
 
 			}
 		}
-
 	}
 
 	return nil

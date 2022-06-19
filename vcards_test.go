@@ -2,6 +2,7 @@ package main
 
 import (
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 )
@@ -23,7 +24,7 @@ func TestEvaluateVCards(t *testing.T) {
 	simDate := "0507"
 	simulateDate = &simDate
 
-	// walk all files in directory
+	// test test0507.vcf
 	err := filepath.Walk("./test_csvs/test0507.vcf", evaluateVCards)
 	if err != nil {
 		t.Error(err)
@@ -33,4 +34,13 @@ func TestEvaluateVCards(t *testing.T) {
 		t.Log("Found", reminder.(*TestReminder).countReminders, "reminders")
 		t.Error("Found != 3 reminders!")
 	}
+
+	// test wrong path
+	err = filepath.Walk("./test_csvs/notexistant.vcf", evaluateVCards)
+	//if errors.Is(err, o) {
+	if !strings.HasPrefix(err.Error(), "lstat") {
+		t.Log(err)
+		t.Error("err attribute is not checked correctly:", err)
+	}
+
 }
