@@ -10,19 +10,20 @@ import (
 	"time"
 )
 
-type Email struct{}
+// EmailReminder sends notifications via email
+type EmailReminder struct{}
 
-func (e *Email) send(formattedName string, birthday time.Time) error {
+func (e *EmailReminder) send(formattedName string, birthday time.Time, c Config) error {
 	// Set up authentication information.
 	auth := smtp.PlainAuth(
 		"",
-		*smtpUsername,
-		*smtpPassword,
-		strings.Split(*smtpServer, ":")[0],
+		*c.smtpUsername,
+		*c.smtpPassword,
+		strings.Split(*c.smtpServer, ":")[0],
 	)
 
-	from := mail.Address{Name: "Birthday Reminder", Address: *emailSender}
-	to := mail.Address{Name: "", Address: *emailRecipient}
+	from := mail.Address{Name: "Birthday Reminder", Address: *c.emailSender}
+	to := mail.Address{Name: "", Address: *c.emailRecipient}
 	title := formattedName + " birthday is on " + birthday.Format("Jan 2")
 
 	body := formattedName + " birthday is on " + birthday.Format("Jan 2") + "!"
@@ -50,7 +51,7 @@ func (e *Email) send(formattedName string, birthday time.Time) error {
 	// Connect to the server, authenticate, set the sender and recipient,
 	// and send the email all in one step.
 	err := smtp.SendMail(
-		*smtpServer,
+		*c.smtpServer,
 		auth,
 		from.Address,
 		[]string{to.Address},

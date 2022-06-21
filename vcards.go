@@ -10,9 +10,9 @@ import (
 	"github.com/mapaiva/vcard-go"
 )
 
-// function for filepath.Walk() which does all the work of parsing VCF files
-// and checking if a birthday date matches
-func evaluateVCards(path string, info os.FileInfo, err error) error {
+// evaluateVCards can be used as a function for filepath.Walk() which does
+// all the work of parsing VCF files and checking if a birthday date matches
+func (c Config) evaluateVCards(path string, info os.FileInfo, err error) error {
 	if err != nil {
 		return err
 	}
@@ -24,8 +24,8 @@ func evaluateVCards(path string, info os.FileInfo, err error) error {
 
 	// check if we should use current date or if the user wants us to simulate a date
 	var now time.Time
-	if *simulateDate != "" {
-		now, _ = time.Parse("0102", *simulateDate)
+	if *c.simulateDate != "" {
+		now, _ = time.Parse("0102", *c.simulateDate)
 	} else {
 		now = time.Now().Local()
 	}
@@ -58,7 +58,7 @@ func evaluateVCards(path string, info os.FileInfo, err error) error {
 			} else {
 				bd := card.BirthDay
 				if bd != "" {
-					if debugLog {
+					if c.debugLog {
 						log.Println(card.FormattedName, "BirthDay: ", bd)
 					}
 
@@ -85,12 +85,12 @@ func evaluateVCards(path string, info os.FileInfo, err error) error {
 					if err != nil || !bdTime.IsZero() {
 						if bdTime.Month() == now.Month() && bdTime.Day() == now.Day() {
 							log.Println("Today", card.FormattedName, "has his/her birthday")
-							err = reminder.send(card.FormattedName, bdTime)
+							err = c.reminder.send(card.FormattedName, bdTime, c)
 							if err != nil {
 								log.Fatal("Error sending reminder Email!: ", err.Error())
 							}
 						} else {
-							if debugLog {
+							if c.debugLog {
 								log.Println(card.FormattedName, "hasn't birthday today (but on", bdTime.Month(), bdTime.Day(), ")")
 							}
 						}
