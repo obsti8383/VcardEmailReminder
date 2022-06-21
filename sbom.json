@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:70ebcb88-c884-48d4-82c7-7de022606cc7",
+  "serialNumber": "urn:uuid:07aa0177-42c5-45c5-b1f2-fb777df78199",
   "version": 1,
   "metadata": {
-    "timestamp": "2022-06-19T18:14:40Z",
+    "timestamp": "2022-06-21T19:26:58Z",
     "tools": [
       {
         "vendor": "CycloneDX",
@@ -45,11 +45,11 @@
       }
     ],
     "component": {
-      "bom-ref": "pkg:golang/github.com/obsti8383/VcardEmailReminder@v0.0.0-20220619181407-a35599db9cbd?type=module",
+      "bom-ref": "pkg:golang/github.com/obsti8383/VcardEmailReminder@v0.0.0-20220621192624-11abc90aa17c?type=module",
       "type": "application",
       "name": "github.com/obsti8383/VcardEmailReminder",
-      "version": "v0.0.0-20220619181407-a35599db9cbd",
-      "purl": "pkg:golang/github.com/obsti8383/VcardEmailReminder@v0.0.0-20220619181407-a35599db9cbd?type=module",
+      "version": "v0.0.0-20220621192624-11abc90aa17c",
+      "purl": "pkg:golang/github.com/obsti8383/VcardEmailReminder@v0.0.0-20220621192624-11abc90aa17c?type=module",
       "externalReferences": [
         {
           "url": "https://github.com/obsti8383/VcardEmailReminder",
@@ -118,7 +118,7 @@
   ],
   "dependencies": [
     {
-      "ref": "pkg:golang/github.com/obsti8383/VcardEmailReminder@v0.0.0-20220619181407-a35599db9cbd?type=module",
+      "ref": "pkg:golang/github.com/obsti8383/VcardEmailReminder@v0.0.0-20220621192624-11abc90aa17c?type=module",
       "dependsOn": [
         "pkg:golang/github.com/mapaiva/vcard-go@v1.2.0?type=module"
       ]
