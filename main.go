@@ -45,10 +45,11 @@ type Config struct {
 
 func main() {
 	var c Config
-	// use email reminder
-	c.reminder = &EmailReminder{}
+	// default reminder, will be overwritten if test flag is not used
+	c.reminder = &printlnReminder{}
 	// parse command line parameters/flags
 	path := flag.String("path", "", "path where the vcf files reside (or vcf file directly) (required)")
+	test := flag.Bool("test", false, "test only, does not send email (optional)")
 	c.emailRecipient = flag.String("recipient", "", "recipients email address (required)")
 	c.emailSender = flag.String("sender", "", "senders email address (required)")
 	c.smtpServer = flag.String("smtp", "", "smtp server adress, e.g. \"smtp.variomedia.de:25\" (required)")
@@ -56,17 +57,23 @@ func main() {
 	c.smtpPassword = flag.String("password", "", "password for smtp server (required)")
 	c.simulateDate = flag.String("simulateDate", "", "simulate date string, e.g. \"0716\" for the 16th of July (optional)")
 	flag.Parse()
-	flag.VisitAll(func(f *flag.Flag) {
-		if f.Name != "simulateDate" && f.Value.String() == "" {
-			fmt.Println("Required parameter", f.Name, "is missing. Aborting.\nThe following parameters are available:")
-			flag.PrintDefaults()
-			os.Exit(1)
-		} else {
-			if c.debugLog {
-				log.Printf("%s = \"%s\"", f.Name, f.Value.String())
+	if !*test {
+		// use email reminder
+		c.reminder = &EmailReminder{}
+
+		// check for required flags for email reminder
+		flag.VisitAll(func(f *flag.Flag) {
+			if f.Name != "test" && f.Name != "simulateDate" && f.Value.String() == "" {
+				fmt.Println("Error: Required parameter", f.Name, "is missing.\n\nThe following parameters are available:")
+				flag.PrintDefaults()
+				os.Exit(1)
+			} else {
+				if c.debugLog {
+					log.Printf("%s = \"%s\"", f.Name, f.Value.String())
+				}
 			}
-		}
-	})
+		})
+	}
 
 	// walk all files in directory
 	err := filepath.Walk(*path, c.evaluateVCards)
@@ -74,4 +81,11 @@ func main() {
 		log.Fatal(err)
 		os.Exit(1)
 	}
+}
+
+type printlnReminder struct{}
+
+func (r *printlnReminder) send(formattedName string, birthday time.Time, c Config) error {
+	fmt.Println(formattedName + " birthday is on " + birthday.Format("Jan 2") + "!")
+	return nil
 }

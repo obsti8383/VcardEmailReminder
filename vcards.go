@@ -84,7 +84,7 @@ func (c Config) evaluateVCards(path string, info os.FileInfo, err error) error {
 					// if we have found a birthday date, then check if birthday == now
 					if err != nil || !bdTime.IsZero() {
 						if bdTime.Month() == now.Month() && bdTime.Day() == now.Day() {
-							log.Println("Today", card.FormattedName, "has his/her birthday")
+							//log.Println("Today", card.FormattedName, "has his/her birthday")
 							err = c.reminder.send(card.FormattedName, bdTime, c)
 							if err != nil {
 								log.Fatal("Error sending reminder Email!: ", err.Error())
